@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createMaterialTopTabNavigator } from "react-navigation";
+import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
+import NavigationUitl from "../navigator/NavigationUitl";
 /* 加载了顶部切换导航 */
 type Props = {};
 export default class PopularPage extends Component<Props> {
-  _tabNavigator () {
-    return createMaterialTopTabNavigator({
+  render () {
+    const TabNavigator = createAppContainer(createMaterialTopTabNavigator({
       PopularTab1: {
         screen: PopularTab,
         navigationOptions: {
@@ -18,25 +19,21 @@ export default class PopularPage extends Component<Props> {
           title: 'Tab2'
         }
       }
-    })
-  }
-  render () {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to PopularPage!</Text>
-      </View>
-    );
+    }))
+    return <TabNavigator />
   }
 }
 
-/* 创建每一个topNav组件 */
-export default class PopularTab extends Component<Props> {
+class PopularTab extends Component<Props> {
   render () {
-    const { tabText } = this.props
+    const { tabLabel } = this.props
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>tabText</Text>
-      </View>
+        <Text style={styles.welcome}>{tabLabel}</Text>
+        <Text onPress={() => {
+          NavigationUitl.goPage({ navigation: this.props.navigation }, "DetailPage")
+        }} style={styles.welcome}>点击跳转到详情页</Text>
+      </View >
     );
   }
 }

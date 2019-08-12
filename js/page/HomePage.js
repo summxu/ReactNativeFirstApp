@@ -9,15 +9,22 @@ import MyPage from "./MyPage";
 import FavoritePage from "./FavoritePage";
 import TrendingPage from "./TrendingPage";
 import PopularPage from "./PopularPage";
+
+import NavigationUitl from "../navigator/NavigationUitl";
 /* 主页，加载了底部路由 */
 type Props = {};
 export default class HomePage extends Component<Props> {
+  constructor(props) {
+    super(props)
+    console.disableYellowBox = true
+  }
   _tabNavigator () {
     const bottomNav = createBottomTabNavigator({
       PopularPage: {
         screen: PopularPage,
         navigationOptions: {
           tabBarLabel: '最热',
+          /* 这里实际上是一个对象 的 { } 按需引用*/
           tabBarIcon: ({ tintColor, focused }) => {
             return <MaterialIcons
               name={'whatshot'}
@@ -66,10 +73,16 @@ export default class HomePage extends Component<Props> {
           }
         }
       }
-    })
+    }, {
+        tabBarOptions: {
+          activeTintColor: 'red'
+        }
+      })
     return createAppContainer(bottomNav)
   }
   render () {
+    /* 把navigation暂存 */
+    NavigationUitl.navigation = this.props.navigation
     const Tab = this._tabNavigator()
     return <Tab />
   }
