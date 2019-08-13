@@ -6,8 +6,8 @@ type Props = {};
 export default class WelcomePage extends Component<Props> {
   componentDidMount () {
     this.time = setTimeout(() => {
-      NavigationUitl.toHome(this.props.navigation)
-    }, 3000);
+      NavigationUitl.goHome(this.props.navigation)
+    }, 300);
   }
 
   render () {
