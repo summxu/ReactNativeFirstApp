@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import NavigationUitl from "../navigator/NavigationUitl";
 
-type Props = {};
-export default class WelcomePage extends Component<Props> {
+export default class WelcomePage extends Component {
   componentDidMount () {
     this.time = setTimeout(() => {
       NavigationUitl.goHome(this.props.navigation)

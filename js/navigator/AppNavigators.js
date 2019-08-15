@@ -1,7 +1,6 @@
 import {
   createStackNavigator,
-  createSwitchNavigator,
-  createAppContainer
+  createSwitchNavigator
 } from "react-navigation";
 
 import WelcomePage from "../page/WelcomePage";

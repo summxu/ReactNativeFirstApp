@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
 import NavigationUitl from "../navigator/NavigationUitl";
+
 /* 加载了顶部切换导航 */
-type Props = {};
-export default class PopularPage extends Component<Props> {
-  render () {
-    const TabNavigator = createAppContainer(createMaterialTopTabNavigator({
-      PopularTab1: {
-        screen: PopularTab,
+export default class PopularPage extends Component {
+  /* 动态配置 tab item */
+  constructor(props) {
+    super(props)
+    this.tabsNames = ['Java', 'Android', "IOS", 'React', 'React Native', 'Swift', 'Vue', 'Object-C']
+  }
+  _genTabs () {
+    let tabs = {}
+    this.tabsNames.forEach((item, index) => {
+      tabs[`tab${index}`] = {
+        /* 可定义screen为回调函数，返回路由组件，来进行 props 传参 */
+        screen: props => <PopularTab {...props} tabLabel={item} />,
         navigationOptions: {
-          title: 'Tab1'
-        }
-      },
-      PopularTab2: {
-        screen: PopularTab,
-        navigationOptions: {
-          title: 'Tab2'
+          title: item
         }
       }
-    }))
+    });
+    return tabs
+  }
+  render () {
+    const TabNavigator = createAppContainer(createMaterialTopTabNavigator(
+      this._genTabs(), {
+        tabBarOptions: {
+          upperCaseLabel: false,
+          scrollEnabled: true,
+          style: styles.tabBarSyle,
+          activeTintColor: 'red'
+        }
+      }
+    ))
     return <TabNavigator />
   }
 }
 
-class PopularTab extends Component<Props> {
+class PopularTab extends Component {
   render () {
     const { tabLabel } = this.props
     return (
@@ -49,5 +63,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  tabBarSyle: {
+    height: 40,
+    backgroundColor: '#3d3d3d'
   }
 });
