@@ -11,6 +11,9 @@ import DetailPage from "../page/DetailPage";
 import { connect } from "react-redux";
 import { createReactNavigationReduxMiddleware, createReduxContainer } from "react-navigation-redux-helpers";
 
+/* 设置默认的跟路由 */
+export const rootCom = 'Init'
+
 const InitNavigator = createStackNavigator({
   WelcomePage: {
     screen: WelcomePage,
@@ -31,7 +34,7 @@ const MainNavigator = createStackNavigator({
   }
 })
 
-export const RootNavigation = createSwitchNavigator({
+export const RootNavigator = createSwitchNavigator({
   Init: InitNavigator,
   Main: MainNavigator
 }, { navigationOptions: { header: null } })
@@ -43,7 +46,7 @@ export const middleware = createReactNavigationReduxMiddleware(
 );
 
 /* 检查key 添加订阅 */
-const AppNavigationState = createReduxContainer(RootNavigation, 'root')
+const AppNavigationState = createReduxContainer(RootNavigator, 'root')
 /* 创建映射关系 */
 const mapStateToProps = state => ({
   state: state.nav
