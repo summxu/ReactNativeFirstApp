@@ -15,7 +15,7 @@ const navReducer = (state = navState, action) => {
 };
 
 /**
- * 3.合并reducer
+ * 3.合并reducer,把所有的reducer聚合起来
  * @type {Reducer<any> | Reducer<any, AnyAction>}
  */
 const index = combineReducers({

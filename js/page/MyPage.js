@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { connect } from "react-redux";
+import actions from "../action";
 
-export default class MyPage extends Component {
+class MyPage extends Component {
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to MyPage!</Text>
+        <Button title="点我切换主题" onPress={() => {
+          this.props.onThemeChange('red')
+        }}></ Button>
       </View>
-    );
+    )
   }
 }
+
+const mapStateToProps = state => {
+  return state.theme
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onThemeChange: theme => dispatch(actions.onThemeChange(theme))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MyPage)
 
 const styles = StyleSheet.create({
   container: {

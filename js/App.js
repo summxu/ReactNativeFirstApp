@@ -3,8 +3,11 @@ import { Provider } from 'react-redux';
 import AppNavigator from './navigator/AppNavigators';
 import store from './store'
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    console.disableYellowBox = true
+  }
   render () {
     /**
      * 将store传递给App框架

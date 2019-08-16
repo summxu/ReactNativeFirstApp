@@ -9,6 +9,7 @@ import MyPage from "../page/MyPage";
 import FavoritePage from "../page/FavoritePage";
 import TrendingPage from "../page/TrendingPage";
 import PopularPage from "../page/PopularPage";
+import { connect } from "react-redux";
 
 const TABS = {
   /* 底部路由动态配置,页路由 */
@@ -67,18 +68,19 @@ const TABS = {
   }
 }
 
-export default class DynamicTabNavigator extends Component {
+class DynamicTabNavigator extends Component {
   _tabNavigator () {
     const { PopularPage, MyPage, TrendingPage, FavoritePage } = TABS
     /* 根据需要，动态设置小tabs */
-    const tabs = { PopularPage, MyPage, TrendingPage, FavoritePage }
+    const tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
     /* 动态配置每个组件的名字 */
     PopularPage.navigationOptions.tabBarLabel = '最新'
+    console.log(this.props)
     const bottomNav = createBottomTabNavigator({
       ...tabs
     }, {
         tabBarOptions: {
-          activeTintColor: 'red'
+          activeTintColor: this.props.theme
         }
       })
     return createAppContainer(bottomNav)
@@ -88,3 +90,17 @@ export default class DynamicTabNavigator extends Component {
     return <Tab />
   }
 }
+
+/* state 和组件绑定 */
+/* connect(
+  [mapStateToProps] 是一个回调函数，参数是state 返回一个函数, 
+  [mapDispatchToProps] 是一个回调函数，返回一个对象, 
+  [mergeProps], 
+  [options]) */
+const mapStateToProps = state => {
+  return state.theme
+}
+const mapDispatchToProps = dispatch => {
+  return {}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DynamicTabNavigator)
