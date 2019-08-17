@@ -8,7 +8,7 @@ class MyPage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to MyPage!</Text>
-        <Button title="点我切换主题" onPress={() => {
+        <Button title="点我切换主题" color={this.props.theme} onPress={() => {
           this.props.onThemeChange('red')
         }}></ Button>
       </View>

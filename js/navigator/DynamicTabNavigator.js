@@ -75,15 +75,14 @@ class DynamicTabNavigator extends Component {
     const tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
     /* 动态配置每个组件的名字 */
     PopularPage.navigationOptions.tabBarLabel = '最新'
-    console.log(this.props)
-    const bottomNav = createBottomTabNavigator({
+    this.bottomNav = createBottomTabNavigator({
       ...tabs
     }, {
         tabBarOptions: {
           activeTintColor: this.props.theme
         }
       })
-    return createAppContainer(bottomNav)
+    return createAppContainer(this.bottomNav)
   }
   render () {
     const Tab = this._tabNavigator()
