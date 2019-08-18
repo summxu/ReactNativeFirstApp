@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import NavigationUitl from "../navigator/NavigationUitl";
 import { connect } from "react-redux";
 import actions from "../action";
 
@@ -10,6 +11,9 @@ class MyPage extends Component {
         <Text style={styles.welcome}>Welcome to MyPage!</Text>
         <Button title="点我切换主题" color={this.props.theme} onPress={() => {
           this.props.onThemeChange('red')
+        }}></ Button>
+        <Button title="FetchDemo" color={this.props.theme} onPress={() => {
+          NavigationUitl.goPage({ navigation: this.props.navigation }, "FetchDemo")
         }}></ Button>
       </View>
     )
